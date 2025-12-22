@@ -17,11 +17,11 @@ router.get('/cart',isLoggedIn, async (req,res)=>{
     let user = await userModel.findOne({email : req.user.email}).populate("cart");
     res.render("cart",{ user});
 });
-router.get("/addtocart/:productid",isLoggedIn, async (req,res)=>{
-    let user = await userModel.findOne({email : req.user.email});
-    user.cart.push(req.params.productid);
-    await user.save();
-    req.flash("success","Added to cart");
-    res.redirect("/shop")
-})
+// router.get("/addtocart/:productid",isLoggedIn, async (req,res)=>{
+//     let user = await userModel.findOne({email : req.user.email});
+//     user.cart.push(req.params.productid);
+//     await user.save();
+//     req.flash("success","Added to cart");
+//     res.redirect("/shop")
+// })
 module.exports = router;
