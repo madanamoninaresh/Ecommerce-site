@@ -52,6 +52,7 @@ router.get("/cart", isLoggedIn, async (req, res) => {
 
     res.render("cart", { user , success: req.flash , platformFee, grandTotal});
 });
+<<<<<<< HEAD
 
 
 router.get("/addtocart/:productid", isLoggedIn, async (req, res) => {
@@ -123,4 +124,13 @@ router.get("/cart/remove/:productid", isLoggedIn, async (req, res) => {
 });
 
 
+=======
+// router.get("/addtocart/:productid",isLoggedIn, async (req,res)=>{
+//     let user = await userModel.findOne({email : req.user.email});
+//     user.cart.push(req.params.productid);
+//     await user.save();
+//     req.flash("success","Added to cart");
+//     res.redirect("/shop")
+// })
+>>>>>>> c3ee9150335cef4193aaf2ad987ad468871cc8c6
 module.exports = router;
