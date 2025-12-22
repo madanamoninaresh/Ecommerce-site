@@ -1,19 +1,43 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const ownerSchema = mongoose.Schema({
+const ownerSchema = new mongoose.Schema(
+  {
     fullname: {
-        type:String,
-        minlength:3,
-        trim:true
+      type: String,
+      required: true,
+      minlength: 3,
+      trim: true,
     },
-    email: String,
-    password: String,
-    products: [{
-        type: Array,
-        default: []
-    }],
-    picture: String,
-    gstin:String,
-})
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
 
-module.exports = mongoose.model('owner',ownerSchema);
+    // Owner can manage many products
+    products: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+      },
+    ],
+
+    picture: {
+      type: String,
+      default: "",
+    },
+
+    gstin: {
+      type: String,
+      trim: true,
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("Owner", ownerSchema);

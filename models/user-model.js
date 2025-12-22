@@ -1,24 +1,49 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema(
+  {
     fullname: {
-        type:String,
-        minlength:3,
-        trim:true
+      type: String,
+      required: true,
+      minlength: 3,
+      trim: true,
     },
-    email: String,
-    password: String,
-    cart: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref : "product"
-    }],
-    orders: [{
-        type: Array,
-        default: []
-    }],
-    contact: Number,
-    picture: String,
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    // If a user adds items to cart or wishes to purchase later
+    products: [
+  {
+    productId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product"
+    },
+    quantity: {
+      type: Number,
+      default: 1
+    }
+  }
+],
+    picture: {
+      type: String, // store URL if using Cloudinary later
+      default: "",
+    },
+    role: {
+  type: String,
+  enum: ["user", "admin"],
+  default: "user"
+  },
 
-})
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('user',userSchema)
+module.exports = mongoose.model("User", userSchema);

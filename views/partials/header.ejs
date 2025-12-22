@@ -7,16 +7,34 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
+
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+</style>
+
 </head>
 
 <body class="font-['helvetica_now_display']">
     <nav class="w-full flex justify-between py-3">
         <h3 class="text-xl">Scatch</h3>
+
         <% var loggedIn = typeof loggedIn !== "undefined" ? loggedIn : true %>
         <% if (loggedIn) { %>
+            <% if (user && user.role === "admin") { %>
+                    <a href="/owners/dashboard">Admin Dashboard</a>
+            <% } %>
             <div class="flex gap-5">
                 <a href="/shop">Shop</a>
-                <a href="/cart">Cart</a>
+                <a href="/cart" class="flex gap-1 items-center">
+                    <i class="ri-shopping-cart-2-line text-xl"></i>
+                    <span>(<%= cartCount %>)</span>
+                </a>
+
                 <a href="/account">My Account</a>
                 <a class="text-red-600"href="/users/logout">Log Out</a>
             </div>

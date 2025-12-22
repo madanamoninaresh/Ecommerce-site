@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const ownerModel = require('../models/owner-model')
+const isAdmin = require("../middlewares/isAdmin");
+const productModel = require("../models/product-model")
+
 
 // console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV === "development"){
@@ -20,8 +23,22 @@ if (process.env.NODE_ENV === "development"){
     // console.log(process.env.NODE_ENV)
 };
 
-router.get('/admin',(req,res)=>{
+
+// ADMIN PRODUCT LIST
+router.get("/products", isAdmin, async (req, res) => {
+    const products = await productModel.find();
+    res.render("products", { products });
+});
+
+
+
+
+
+
+
+router.get('/admin', isAdmin ,(req,res)=>{
     let success = req.flash("success")
+    // let error = req.flash("error")
     res.render("createproducts", {success})
 })
 // router.post('/create',async (req,res)=>{

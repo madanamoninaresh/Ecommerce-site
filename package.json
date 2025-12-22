@@ -13,6 +13,7 @@
   "type": "commonjs",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "cloudinary": "^1.37.2",
     "config": "^4.1.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.7",
@@ -24,6 +25,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.3",
     "multer": "^2.0.2",
-    "nodemon": "^3.1.10"
+    "multer-storage-cloudinary": "^2.2.1",
+    "nodemon": "^3.1.10",
+    "streamifier": "^0.1.1"
   }
 }
